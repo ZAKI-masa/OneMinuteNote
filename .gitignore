@@ -1,0 +1,13 @@
+# ビルド出力・コンパイル済みファイル
+/build/
+/target/
+*.class
+
+# IDE（開発環境）の個人設定ファイル
+.settings/
+.classpath
+.project
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
