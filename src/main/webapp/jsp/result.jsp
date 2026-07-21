@@ -19,7 +19,7 @@
 </head>
 <body>
 
-<h2>保存しました（${todayCount}/10ページ完了）</h2>
+<h2>保存しました${todayCount}/10ページ完了</h2>
 
 <div class="memo-box">
     <div class="title">${savedMemo.title}</div>
@@ -27,7 +27,7 @@
 </div>
 
 <a href="${pageContext.request.contextPath}/jsp/index.jsp">
-    <button type="button" style="padding: 10px 20px; font-size: 16px;">次のメモを書く</button>
+    <button type="button" style="padding: 10px 20px; font-size: 16px;">新規ノート</button>
 </a>
 
 </body>
