@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +17,8 @@
 <body>
 
 <div class="paper">
-    <div class="title">${memo.title}</div>
-    <div class="content">${memo.content}</div>
+    <div class="title"><c:out value="${memo.title}"/></div>
+    <div class="content"><c:out value="${memo.content}"></c:out></div>
     
     <a href="${pageContext.request.contextPath}/list-servlet" class="back-link">一覧へ戻る</a>
 </div>
