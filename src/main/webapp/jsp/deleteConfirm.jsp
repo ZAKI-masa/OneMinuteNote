@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     // URLの ?id=◯◯ からIDを受け取る
-    String id = request.getParameter("id");
+    int id;
+	try{
+		id = Integer.parseInt(request.getParameter("id"));
+	} catch(NumberFormatException ex){
+		response.sendRedirect(request.getContextPath() + "/list-servlet");
+		return;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +32,7 @@
     <!-- 最終的な削除を実行するフォーム（POST） -->
     <form action="<%= request.getContextPath() %>/delete-servlet" method="POST" style="display: inline;">
         <!-- 受け取ったIDをセットしてServletへ引き渡す -->
-        <input type="hidden" name="id" value="<%= id %>">
+       	<input type="hidden" name = "id" value="<%=id%>"/>
         <button type="submit" class="btn btn-delete">削除する</button>
     </form>
     
