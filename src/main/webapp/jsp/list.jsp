@@ -5,6 +5,8 @@
     // Servletから渡されたリストを受け取る
     List<Memo> memoList = (List<Memo>) request.getAttribute("memoList"); 
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,9 +35,9 @@
         <% for (Memo memo : memoList) { %>
             <div class="memo-card">
                 <div class="memo-info">
-                    <div class="title"><%= memo.getTitle() %></div>
+                    <div class="title"><c:out value="<%=memo.getTitle()%>"></c:out></div>
                     <!-- 本文のプレビュー表示 -->
-                    <div class="preview"><%= memo.getContent() %></div>
+                    <div class="preview"><c:out value="<%=memo.getContent() %>"></c:out></div>
                 </div>
                 <div>
                     <a href="<%= request.getContextPath() %>/detail-servlet?id=<%= memo.getId() %>" class="btn btn-detail">詳細</a>
