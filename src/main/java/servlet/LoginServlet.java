@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		User user = userDao.selectByUserName(username);
 		
 		//
-		if (user != null && user.getPassword().equals(password)) {
+		if (user != null && userDao.checkPassword(password, user.getPassword())) {
 
 			System.out.println("success login");
 			HttpSession session = request.getSession();

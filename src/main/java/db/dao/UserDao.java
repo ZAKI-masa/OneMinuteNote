@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import db.dto.DatabaseManager;
 import db.dto.User;
 
@@ -61,16 +63,23 @@ public class UserDao {
 
 		String sql = "INSERT INTO users(username,password) values(?,?)";
 
+		 // 平文パスワードを保存せず、ハッシュ化してから保存する
+		String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		
 		try (Connection conn = DatabaseManager.createConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			ps.setString(1, user.getUserName());
-			ps.setString(2, user.getPassword());
+			ps.setString(2, hashedPassword);
 			ps.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean checkPassword(String rawPassword,String hashedPassword) {
+		return BCrypt.checkpw(rawPassword, hashedPassword);
 	}
 
 }
