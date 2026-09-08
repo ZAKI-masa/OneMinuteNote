@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="/jsp/shared/header.jsp"/>
 <div class="paper">
     <div class="title"><c:out value="${memo.title}"/></div>
     <div class="content"><c:out value="${memo.content}"></c:out></div>

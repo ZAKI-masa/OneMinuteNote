@@ -155,6 +155,7 @@
 </head>
 <body>
 
+<jsp:include page="/jsp/shared/header.jsp"/>
 <!-- 操作パネル -->
 <div class="controls-bar">
     <!-- ★ここに追加：一覧画面へのリンクボタン -->
@@ -164,6 +165,7 @@
         <option value="120">2分</option>
         <option value="60" selected>1分</option>
         <option value="40">40秒</option>
+        <option value="3">3秒</option>
     </select>
     <select id="modeSetting">
         <option value="line" selected>1行ずつ(30字で改行)</option>
@@ -177,6 +179,7 @@
 <div class="paper">
 
     <form id="memoForm" action="${pageContext.request.contextPath}/save-servlet" method="POST">
+    	
         
         <div class="paper-header">
             <input type="text" id="title" name="title" class="title-input" placeholder="テーマを入力" required>

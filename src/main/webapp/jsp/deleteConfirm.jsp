@@ -24,6 +24,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/jsp/shared/header.jsp"/>
 
 <div class="confirm-box">
     <h2>メモの削除</h2>
