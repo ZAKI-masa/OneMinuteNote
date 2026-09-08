@@ -8,6 +8,7 @@ public class Memo implements Serializable {
 	private int id;
 	private String title;
 	private String content;
+	private int userId;
 	private String createdAt;
 
 	public Memo() {
@@ -36,6 +37,17 @@ public class Memo implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 
 	public String getCreatedAt() {
 		return createdAt;

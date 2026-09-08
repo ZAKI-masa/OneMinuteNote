@@ -99,6 +99,7 @@ public class MemoDao {
 					memo.setId(rs.getInt("id"));
 					memo.setTitle(rs.getString("title"));
 					memo.setContent(rs.getString("content"));
+					memo.setUserId(rs.getInt("user_id"));
 				}
 			}
 		} catch (Exception e) {

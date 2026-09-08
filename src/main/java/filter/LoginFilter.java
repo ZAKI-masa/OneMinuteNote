@@ -32,7 +32,9 @@ public class LoginFilter implements Filter {
         // ログイン関連はチェック対象外（ここに含めないと無限リダイレクトループになる）
         boolean isExcluded = path.equals("/login-servlet")
                 || path.equals("/logout-servlet")
-                || path.equals("/jsp/login.jsp");
+                || path.equals("/jsp/login.jsp")
+                || path.equals("/register-servlet")
+                || path.equals("/jsp/register.jsp");   // ← これも追加
 
         if (isExcluded) {
             chain.doFilter(req, res);

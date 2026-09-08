@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,11 +21,13 @@
 </head>
 <body>
 
+<jsp:include page="/jsp/shared/header.jsp"/>
+
 <h2>保存しました${todayCount}/10ページ完了</h2>
 
 <div class="memo-box">
-    <div class="title">${savedMemo.title}</div>
-    <div class="content">${savedMemo.content}</div>
+    <div class="title"><c:out value="${savedMemo.title}"/></div>
+    <div class="content"><c:out value="${savedMemo.content}"/></div>
 </div>
 
 <a href="${pageContext.request.contextPath}/jsp/index.jsp">

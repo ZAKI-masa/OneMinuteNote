@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.dao.MemoDao;
 import db.dto.Memo;
+import db.dto.User;
 
 /**
  * Servlet implementation class SaveServlet
@@ -33,11 +35,14 @@ public class SaveServlet extends HttpServlet {
 
         String title = request.getParameter("title");
         String content = request.getParameter("content");
+        //userIdの取得先はsession
+        HttpSession session = request.getSession(false);
+        User loginUser = (User)session.getAttribute("loginUser");
 
         Memo memo = new Memo();
         memo.setTitle(title);
         memo.setContent(content);
-
+        memo.setUserId(loginUser.getId());
         MemoDao dao = new MemoDao();
         dao.insert(memo);
         

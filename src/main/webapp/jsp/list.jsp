@@ -26,7 +26,7 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="/jsp/shared/header.jsp"/>
 <div class="container">
     <h2>過去のメモ一覧</h2>
     <a href="<%= request.getContextPath() %>/jsp/index.jsp" class="header-link">＋ 新しいメモを書く</a>
