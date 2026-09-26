@@ -8,7 +8,7 @@
     /* 画面全体の背景 */
     body {
         font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-        background-color: #e9ecef;
+        
         color: #333;
         display: flex;
         flex-direction: column;
@@ -17,6 +17,19 @@
         margin: 0;
         padding-top: 30px;
     }
+    
+    .background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+
+        z-index: -1;
+     }
 
     /* 操作パネル */
     .controls-bar {
@@ -75,12 +88,16 @@
     .paper {
         background: #ffffff;
         width: 100%;
-        max-width: 800px;
+        max-width: 880px;
         aspect-ratio: 1.414 / 1; 
         padding: 50px 60px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
         box-sizing: border-box;
         position: relative;
+        
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(8px);
+        border-radius: 15px;
     }
 
     .paper-header {
@@ -155,6 +172,17 @@
 </head>
 <body>
 
+<video id="backgroundVideo"
+       class="background-video"
+       muted
+       
+       playsinline>
+    <source src="${pageContext.request.contextPath}/videos/background.mp4"
+            type="video/mp4">
+</video>
+
+
+
 <jsp:include page="/jsp/shared/header.jsp"/>
 <!-- 操作パネル -->
 <div class="controls-bar">
@@ -167,6 +195,9 @@
         <option value="40">40秒</option>
         <option value="3">3秒</option>
     </select>
+    <button type="button" onclick="startBackgroundAnimation()">
+    ページを捲る
+</button>
     <select id="modeSetting">
         <option value="line" selected>1行ずつ(30字で改行)</option>
         <option value="bulk">一括入力(200字)</option>
@@ -223,6 +254,19 @@
 </div>
 
 <script>
+function startBackgroundAnimation() {
+    const paper = document.querySelector(".paper");
+    const video = document.getElementById("backgroundVideo");
+
+    paper.style.display = "none";
+    video.currentTime = 0;
+    video.play();
+
+    setTimeout(function() {
+        paper.style.display = "block";
+    }, 8000);
+}
+
     const dateObj = new Date();
     const yyyy = dateObj.getFullYear();
     const mm = dateObj.getMonth() + 1;
@@ -318,16 +362,51 @@
 
             if (timeLeft <= 0) {
                 clearInterval(timerId); 
+
                 if (mode === 'bulk') {
                     bulkInput.readOnly = true;
                 } else {
                     lineInputs.forEach(input => input.readOnly = true);
                 }
-                
-                combineContent(mode); 
-                form.submit(); 
+
+                combineContent(mode);
+
+                const content = document.getElementById('content').value.trim();
+
+                if (content === "") {
+                    alert("「本文が未入力(タイトルのみ)のため、自動的に削除されました。」");
+
+                    titleInput.value = "";
+                    titleInput.readOnly = false;
+
+                    timeSetting.value = "60";
+                    timeSetting.disabled = false;
+                    timeDisplay.textContent = "60";
+
+                    modeSetting.value = "line";
+                    modeSetting.disabled = false;
+
+                    startBtn.disabled = false;
+
+                    bulkInput.value = "";
+                    bulkInput.disabled = true;
+                    bulkInput.readOnly = false;
+
+                    lineInputs.forEach(function(input) {
+                        input.value = "";
+                        input.disabled = true;
+                        input.readOnly = false;
+                    });
+
+                    document.getElementById("content").value = "";
+
+                    return;
+                }
+
+                form.submit();
             }
         }, 1000);
+
     }
 
     function combineContent(mode) {

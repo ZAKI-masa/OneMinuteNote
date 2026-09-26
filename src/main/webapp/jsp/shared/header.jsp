@@ -3,13 +3,16 @@
 <style>
     .app-header {
         display: flex;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         align-items: center;
         background: #2c3e50;
         color: #fff;
         padding: 10px 20px;
         font-family: sans-serif;
+        border-radius: 5px;
         margin-bottom: 20px;
+        width: 400px;
+        right: 90px; bottom: 475px;
     }
     .app-header a { color: #fff; text-decoration: none; }
     .app-header .app-title { font-weight: bold; font-size: 16px; }
