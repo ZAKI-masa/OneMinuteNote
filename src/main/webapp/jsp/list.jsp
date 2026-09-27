@@ -21,8 +21,7 @@
     .memo-info { flex: 1; overflow: hidden; margin-right: 20px; }
 
 .book-container { position: relative; width: 100%; perspective: 1500px; min-height: 737px; border: 10px solid #5a0f18; box-shadow: inset 0 0 0 2px #8b2a35; }
-.book-page { display: none; position: absolute; top: 0; left: 0; width: 100%; background: #fffdf7; padding: 0px 0 40px 0; transform-origin: left center; }
-.book-page.active { display: block; }
+.book-page { display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 737px; background: #fffdf7; padding: 0px 0 40px 0; box-sizing: border-box; transform-origin: left center; }.book-page.active { display: block; }
 .book-page.flipping { animation: pageFlip 0.9s ease-in-out forwards; z-index: 2; margin-left: 5px; }
 .book-page.flipping-prev { animation: pageFlipPrev 0.8s ease-in-out forwards; transform-origin: right center; z-index: 2; margin-left: 0.3px; }
 @keyframes pageFlipPrev { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(180deg); } }
@@ -36,8 +35,7 @@
 .page-corner-left::after { content: ""; position: absolute; left: 0; bottom: 0; width: 80px; height: 80px; border-left: 1px solid rgba(120,110,95,0.25); border-bottom: 1px solid rgba(120,110,95,0.25); clip-path: polygon(0 100%, 100% 0, 0 0); }
 .page-corner-left:hover { transform: scale(1.05); }
 /* ページ番号 */
-.page-number { text-align: center; color: #999; font-size: 13px; margin-top: 10px; }
-/* ページめくりアニメーション */
+.page-number { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); text-align: center; color: #999; font-size: 13px; margin: 0; }/* ページめくりアニメーション */
 .page-flip-next {
     animation: pageFlipNext 0.8s ease-in-out forwards;
 }
@@ -63,7 +61,7 @@
     .btn { padding: 8px 16px; font-size: 14px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; color: white; margin-left: 5px; }
     .btn-detail { background-color: #3498db; }
     .btn-delete { background-color: #e74c3c; }
-    .header-link { display: inline-block; }
+    .header-link { display: inline-flex; align-items: center; justify-content: center; width: 45px; height: 45px; font-size: 30px; text-decoration: none; color: #2c3e50; border: 2px solid #2c3e50; border-radius: 8px; box-sizing: border-box; background-color: #f5f7fa; }    
     .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
 </style>
 </head>
@@ -149,7 +147,7 @@ else if (direction === -1) {
 <div class="container">
     <div class="header-row">
     <h2>過去のメモ一覧</h2>
-       <a href="<%= request.getContextPath() %>/jsp/index.jsp" class="header-link">＋ 新しいメモを書く</a>
+       <a href="<%= request.getContextPath() %>/jsp/index.jsp" class="header-link">＋</a>
     </div>
 
 <% if (memoList != null && !memoList.isEmpty()) { %>
